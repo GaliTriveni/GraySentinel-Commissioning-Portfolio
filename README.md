@@ -6,9 +6,7 @@ This portfolio documents my 45-day journey from Recruit to Commissioned Operator
 ---
 
 ## About Me  
-**Gali Triveni** 
-
-– Cybersecurity Analyst focused on detection engineering, SOC operations, and threat hunting.  
+**Gali Triveni** – Cybersecurity Analyst focused on detection engineering, SOC operations, and threat hunting.  
 - Interests: Cybersecurity labs, SIEM tools, network traffic analysis  
 - Target Role: Security Operations Analyst / Detection Engineer  
 
