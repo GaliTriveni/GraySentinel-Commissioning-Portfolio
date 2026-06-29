@@ -17,10 +17,13 @@ Demonstrate use of different scan types, NSE scripts, and evasion techniques.
   
 ## Evidence 
 <img width="810" height="467" alt="Evasion Technique Logs" src="https://github.com/user-attachments/assets/a4d506ad-6ab5-4bc9-bb4d-f2993f5df32e" />
+  
   *Execution of custom `nmap_automator.sh` script against 192.168.56.102, listing open ports and SMB negotiation results.*
 <img width="810" height="576" alt="smb_enum" src="https://github.com/user-attachments/assets/d9996160-aa61-4448-9d12-8eb921436790" />
+  
   *Demonstrates SMB service exposure on port 445 with blocked enumeration attempts.*
 <img width="687" height="227" alt="udp_scan" src="https://github.com/user-attachments/assets/8af8e36e-7a7d-44ff-b0ed-253c3da7dd0c" />
+  
   *Shows UDP ports 137 open and 138 open|filtered, confirming NetBIOS activity.*
 
 ## Conclusion
