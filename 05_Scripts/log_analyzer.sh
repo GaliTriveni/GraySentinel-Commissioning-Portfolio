@@ -33,14 +33,10 @@ Document rules, outputs, and challenges faced.
 ---
 
 ## Evidence
-Screenshots uploaded and referenced:
-
+  Screenshots uploaded and referenced:
 
   *Shows auditctl rules monitoring passwd, shadow, sudoers, sshd_config, and cron files.*  
-
- 
   *Evidence of `/etc/passwd` modification detected via ausearch.*  
-
   *Shows centralized logging with remote log entries.*  
 
 ---
