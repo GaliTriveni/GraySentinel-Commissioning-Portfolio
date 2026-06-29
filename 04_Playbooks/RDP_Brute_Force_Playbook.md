@@ -55,8 +55,8 @@ This playbook covers the detection and response to RDP brute force attacks.
 - Monitor for re-infection (30-day monitoring period)
 
 **12. LESSONS LEARNED**
-a. Was MFA enabled?
-b. Are RDP ports exposed unnecessarily?
-c. Should RDP be restricted to VPN only?
-d. Update playbook based on findings
+- Was MFA enabled?
+- Are RDP ports exposed unnecessarily?
+- Should RDP be restricted to VPN only?
+- Update playbook based on findings
 
