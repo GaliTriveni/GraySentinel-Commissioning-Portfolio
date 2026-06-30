@@ -1,1 +1,80 @@
+# Suricata Exfiltration Rules Playbook
+
+**Date:** 2026-06-26  
+**Analyst:** Triveni 
+
+---
+
+## Objective
+Simulate data exfiltration via HTTP POST, DNS tunneling, and ICMP.  
+Develop Suricata rules to detect these techniques and document detection coverage.
+
+---
+
+## Findings
+- **HTTP POST Exfiltration:**  
+  - Simulated with PowerShell `Invoke-WebRequest -Method POST`.  
+  - Suricata rule created to detect large POST requests with suspicious body content.  
+
+- **DNS Tunneling:**  
+  - Attempted with `dnscat2`.  
+  - Detection opportunities: unusually long subdomains, high volume of TXT requests, base64‑like domains.  
+  - Suricata rule created to flag long DNS queries.  
+
+- **ICMP Exfiltration:**  
+  - Simulated with crafted ICMP packets (`icmp_exfil.pcap`).  
+  - Suricata rule created to detect ICMP packets with large payload sizes.  
+
+- **Detection Rules:**  
+  - **HTTP Exfiltration:**  
+    ```suricata
+    alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"Possible HTTP data exfiltration";
+    http.method; content:"POST"; http.request_body; content:!"login"; content:!"submit";
+    http.content_len:>1000; sid:1000040; rev:1;)
+    ```
+  - **DNS Exfiltration:**  
+    ```suricata
+    alert dns $HOME_NET any -> any 53 (msg:"Possible DNS exfiltration - long query";
+    dns_query; pcre:"/^.{50,}/R"; sid:1000041; rev:1;)
+    ```
+  - **ICMP Exfiltration:**  
+    ```suricata
+    alert icmp $HOME_NET any -> $EXTERNAL_NET any (msg:"Possible ICMP exfiltration - large payload";
+    icode:0; itype:8; dsize:>100; sid:1000042; rev:1;)
+    ```
+
+- **Detection Report:**  
+  - HTTP POST → Detected.  
+  - DNS tunneling → Detected.  
+  - ICMP exfiltration → Detected.  
+  - Coverage confirmed across all three methods.  
+
+---
+
+## Evidence
+Screenshots uploaded and referenced:
+
+- ![HTTP POST Exfiltration Screenshot](../06_Reports/http_post_exfil.png)  
+  *Shows PowerShell POST request and Suricata alert.*  
+
+- ![DNS Tunneling Screenshot](../06_Reports/dns_tunneling.png)  
+  *Evidence of dnscat2 setup and Suricata DNS alert.*  
+
+- ![ICMP Exfiltration Screenshot](../06_Reports/icmp_exfil.png)  
+  *Alert triggered by ICMP packet with large payload.*  
+
+- ![Detection Report Screenshot](../06_Reports/exfiltration_report.png)  
+  *Summary table showing detection coverage for HTTP, DNS, and ICMP.*  
+
+---
+
+## Conclusion
+Custom Suricata rules successfully detected simulated exfiltration attempts via HTTP POST, DNS tunneling, and ICMP.  
+Rule tuning (payload size thresholds, regex for long queries, exclusion of normal POST bodies) ensured accurate detection with minimal false positives.
+
+### Recommendations
+- Enable deep packet inspection for outbound traffic.  
+- Monitor for anomalous DNS queries and ICMP payloads.  
+- Integrate Suricata alerts into SIEM for correlation.  
+- Deploy Data Loss Prevention (DLP) solutions for layered defense.  
 
